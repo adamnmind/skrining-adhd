@@ -1,0 +1,584 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>Kuesioner ADHD Dewasa</title><style>:root{color-scheme:light dark;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: one reading column; sticky progress; 18 items on a 5-step frequency scale (ASRS-style); result report with screener, symptom counts, pattern bars, insights, and a shared self-vs-partner history. */
+:root {
+  --bg: #f4f4f7;
+  --surface: #ffffff;
+  --fg: #1c1f2e;
+  --muted: #5d6275;
+  --line: #dcdde6;
+  --accent: #46508f;
+  --accent-soft: #e3e5f3;
+  --accent2: #9a5b22;
+  --ok: #2f7a4b;
+  --warn: #a8641a;
+  --alert: #b23b3b;
+  --alert-soft: #f8e3e3;
+  --font-display: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Plus Jakarta Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12131b; --surface: #1b1d28; --fg: #e6e7ef; --muted: #9a9eb3; --line: #2d3042;
+    --accent: #9aa4e6; --accent-soft: #262a42; --accent2: #e0a56a;
+    --ok: #6cc28c; --warn: #e3a95c; --alert: #ef8a8a; --alert-soft: #3a1f21; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #12131b; --surface: #1b1d28; --fg: #e6e7ef; --muted: #9a9eb3; --line: #2d3042;
+  --accent: #9aa4e6; --accent-soft: #262a42; --accent2: #e0a56a;
+  --ok: #6cc28c; --warn: #e3a95c; --alert: #ef8a8a; --alert-soft: #3a1f21; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg);
+  font-family: var(--font-body); font-size: 16px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 64px;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 780px; margin: 0 auto; display: grid; gap: 24px; }
+.wrap > * { min-width: 0; }
+header.top { padding-top: 40px; display: grid; gap: 10px; }
+.eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+h1 { font-family: var(--font-display); font-weight: 800; font-size: clamp(28px, 6vw, 40px); line-height: 1.1; margin: 0; text-wrap: balance; letter-spacing: -.02em; }
+h2 { font-family: var(--font-display); font-size: 20px; margin: 0; text-wrap: balance; }
+h3 { font-size: 16px; margin: 0; }
+p { margin: 0; }
+.lead { color: var(--muted); max-width: 64ch; }
+.progress { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 10px; display: grid; gap: 6px; border-bottom: 1px solid var(--line); }
+.progress .row { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+.progress .row b { font-family: var(--font-mono); color: var(--fg); font-weight: 600; }
+.bar { height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0; background: var(--accent); transition: width .25s ease; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; display: grid; gap: 16px; }
+.panel > * { min-width: 0; }
+.fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+label.f { display: grid; gap: 6px; font-size: 13px; font-weight: 600; color: var(--muted); }
+input[type=text], input[type=number], input[type=date], select, textarea { font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; width: 100%; min-width: 0; }
+textarea { min-height: 90px; resize: vertical; }
+input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.note { font-size: 14px; color: var(--muted); border-left: 3px solid var(--line); padding-left: 12px; }
+.section-head { display: grid; gap: 4px; }
+.section-head .tag { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--accent); }
+.item { display: grid; gap: 10px; padding-block: 16px; border-top: 1px solid var(--line); }
+.item:first-child { border-top: 0; padding-top: 4px; }
+.q { display: grid; grid-template-columns: 30px 1fr; gap: 8px; }
+.q .k { font-family: var(--font-mono); color: var(--muted); font-weight: 600; }
+.q .ex { display: block; color: var(--muted); font-size: 14px; margin-top: 2px; }
+.scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-left: 38px; }
+.scale button, .pill button, .chk { font: inherit; font-size: 13px; font-weight: 600; line-height: 1.2; padding: 10px 4px; border-radius: 10px; cursor: pointer; background: var(--bg); color: var(--fg); border: 1px solid var(--line); min-height: 44px; }
+.scale button:hover, .pill button:hover, .chk:hover { border-color: var(--muted); }
+.scale button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--surface); }
+.chk[aria-pressed="true"], .pill button[aria-pressed="true"] { background: var(--fg); border-color: var(--fg); color: var(--surface); }
+.missing .q .k { color: var(--alert); }
+.missing .scale button, .missing .pill button { border-color: var(--alert); }
+.pill { display: flex; flex-wrap: wrap; gap: 6px; margin-left: 38px; }
+.pill button { padding: 8px 14px; border-radius: 999px; min-height: 40px; font-size: 14px; }
+.chks { display: flex; flex-wrap: wrap; gap: 8px; margin-left: 38px; }
+.chk { padding: 8px 14px; border-radius: 999px; font-size: 14px; }
+.scale-legend { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-left: 38px; }
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { font: inherit; font-weight: 700; padding: 12px 20px; border-radius: 12px; border: 1px solid var(--fg); background: var(--fg); color: var(--surface); cursor: pointer; min-height: 46px; }
+.btn.ghost { background: transparent; color: var(--fg); border-color: var(--line); }
+.btn.small { padding: 6px 12px; min-height: 34px; font-size: 13px; border-radius: 8px; }
+.btn:disabled { opacity: .5; cursor: default; }
+.err { color: var(--alert); font-weight: 600; font-size: 14px; }
+.ok-msg { color: var(--ok); font-weight: 600; font-size: 14px; }
+#result { scroll-margin-top: 80px; }
+.verdict { font-family: var(--font-display); font-size: clamp(22px, 5vw, 28px); font-weight: 800; line-height: 1.2; text-wrap: balance; }
+.badge { display: inline-flex; font-size: 13px; font-weight: 700; padding: 5px 12px; border-radius: 999px; border: 1px solid currentColor; width: fit-content; }
+.badge.high { color: var(--alert); } .badge.mid { color: var(--warn); } .badge.low { color: var(--ok); }
+.methods { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.method { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 10px; align-content: start; }
+.method .lbl { font-size: 13px; font-weight: 700; }
+.method .src { font-size: 12px; color: var(--muted); }
+.mrow { display: grid; grid-template-columns: 1fr auto; gap: 8px; align-items: baseline; font-size: 14px; }
+.mrow b { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-size: 18px; }
+.mrow .st { grid-column: 1 / -1; font-size: 12px; font-weight: 600; margin-top: -6px; }
+.st.met { color: var(--warn); } .st.no { color: var(--ok); }
+.cde { display: grid; gap: 6px; font-size: 14px; }
+.cde div { display: grid; grid-template-columns: 22px 1fr; gap: 6px; }
+.cde .y { color: var(--warn); font-weight: 700; } .cde .n { color: var(--muted); font-weight: 700; }
+.themes { display: grid; gap: 10px; }
+.theme { display: grid; grid-template-columns: minmax(120px, 200px) 1fr 44px; gap: 10px; align-items: center; font-size: 14px; }
+.theme .track { height: 10px; border-radius: 5px; background: var(--line); overflow: hidden; }
+.theme .track i { display: block; height: 100%; border-radius: 5px; background: var(--accent); }
+.theme.b .track i { background: var(--accent2); }
+.theme b { font-family: var(--font-mono); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; }
+.tips { display: grid; gap: 12px; }
+.tip { border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 6px; }
+.tip ul, .flags ul, .next ol { margin: 0; padding-left: 20px; display: grid; gap: 4px; font-size: 14px; }
+.flags { border: 1px solid var(--warn); border-radius: 12px; padding: 14px 16px; display: grid; gap: 8px; }
+.urgent { background: var(--alert-soft); border: 1px solid var(--alert); border-radius: 12px; padding: 14px 16px; font-size: 14px; display: grid; gap: 6px; }
+.urgent b { color: var(--alert); }
+pre.share { white-space: pre-wrap; font-family: var(--font-mono); font-size: 12.5px; background: var(--bg); border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 0; max-height: 280px; overflow: auto; }
+.disclaimer { font-size: 13px; color: var(--muted); }
+details.method-info summary { cursor: pointer; font-weight: 700; }
+details.method-info div { display: grid; gap: 8px; font-size: 14px; color: var(--muted); margin-top: 10px; }
+.hist-list { display: grid; gap: 8px; }
+.hrow { display: grid; grid-template-columns: 1fr auto; gap: 10px; align-items: center; border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; font-size: 14px; }
+.hrow .meta { color: var(--muted); font-size: 13px; }
+.hrow .nums { font-family: var(--font-mono); font-size: 13px; }
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }
+table.cmp { border-collapse: collapse; font-size: 13px; min-width: 100%; }
+table.cmp th, table.cmp td { padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: center; white-space: nowrap; }
+table.cmp th:first-child, table.cmp td:first-child { text-align: left; position: sticky; left: 0; background: var(--surface); white-space: normal; min-width: 160px; }
+table.cmp td.v { font-family: var(--font-mono); font-weight: 600; }
+td.v0 { color: var(--muted); } td.hit { background: var(--accent-soft); }
+tr.diff td:first-child { box-shadow: inset 3px 0 0 var(--warn); }
+.legend { font-size: 12px; color: var(--muted); }
+@media (max-width: 560px) {
+  .scale, .pill, .scale-legend, .chks { margin-left: 0; }
+  .scale button { font-size: 12px; }
+  .theme { grid-template-columns: 1fr 44px; }
+  .theme .track { grid-column: 1 / -1; grid-row: 2; }
+}
+@media (prefers-reduced-motion: reduce) { .bar > i { transition: none; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <span class="eyebrow">Skrining dewasa 18+ · DSM-5 · Pola ASRS v1.1</span>
+    <h1>Kuesioner ADHD Dewasa</h1>
+    <p class="lead">Untuk usia 18 tahun ke atas. Bisa diisi untuk diri sendiri, atau oleh pasangan yang mengenal orang tersebut sehari-hari. Pilih yang paling menggambarkan <b>6 bulan terakhir</b>. Sekitar 8–10 menit.</p>
+  </header>
+
+  <div class="progress" aria-live="polite">
+    <div class="row"><span>Pertanyaan wajib terisi</span><b id="progTxt">0 / 25</b></div>
+    <div class="bar"><i id="progBar"></i></div>
+  </div>
+
+  <form id="form" novalidate>
+    <div class="wrap">
+      <section class="panel" aria-labelledby="idH">
+        <h2 id="idH">Identitas</h2>
+        <div class="fields">
+          <label class="f" for="nama">Nama orang yang dinilai
+            <input type="text" id="nama" autocomplete="off" placeholder="Nama panggilan">
+          </label>
+          <label class="f" for="usia">Usia (tahun)
+            <input type="number" id="usia" min="18" max="90" inputmode="numeric" placeholder="35">
+          </label>
+          <label class="f" for="pengisi">Diisi oleh
+            <select id="pengisi">
+              <option value="Diri sendiri">Diri sendiri</option>
+              <option value="Pasangan">Pasangan</option>
+              <option value="Keluarga lain">Keluarga lain</option>
+            </select>
+          </label>
+          <label class="f" for="tanggal">Tanggal
+            <input type="date" id="tanggal">
+          </label>
+        </div>
+      </section>
+
+      <section class="panel" id="secS" aria-labelledby="sH">
+        <div class="section-head"><span class="tag">BAGIAN 1 · 18 GEJALA</span><h2 id="sH">Seberapa sering hal ini terjadi?</h2></div>
+        <p class="note">Enam pertanyaan pertama adalah bagian terpenting untuk skrining. Bila diisi oleh pasangan, bacalah “Anda” sebagai orang yang dinilai.</p>
+        <div id="listS"></div>
+      </section>
+
+      <section class="panel" id="secC" aria-labelledby="cH">
+        <div class="section-head"><span class="tag">BAGIAN 2 · RIWAYAT DAN TEMPAT</span><h2 id="cH">Sejak kapan dan di mana</h2></div>
+        <div class="item" id="item-onset">
+          <div class="q"><span class="k">C</span><span>Apakah beberapa kesulitan ini sudah ada <b>sejak sebelum usia 12 tahun</b>?<span class="ex">Contoh: rapor dengan catatan “kurang teliti”, “sering lupa”, “tidak bisa diam”, atau ingatan orang tua dan saudara. Bila ragu, tanyakan ke orang tua.</span></span></div>
+          <div class="pill" id="onsetPills"></div>
+        </div>
+        <div class="item" id="item-settings">
+          <div class="q"><span class="k">D</span><span>Di bidang mana saja kesulitan ini terlihat? Pilih semua yang sesuai.</span></div>
+          <div class="chks" id="settingChks"></div>
+        </div>
+      </section>
+
+      <section class="panel" id="secE" aria-labelledby="eH">
+        <div class="section-head"><span class="tag">BAGIAN 3 · DAMPAK</span><h2 id="eH">Seberapa besar pengaruhnya</h2></div>
+        <p class="note">1 = berjalan sangat baik, 3 = rata-rata, 5 = sangat bermasalah.</p>
+        <div id="listImp"></div>
+      </section>
+
+      <section class="panel" id="secX" aria-labelledby="xH">
+        <div class="section-head"><span class="tag">BAGIAN 4 · KONTEKS</span><h2 id="xH">Hal lain yang bisa mirip ADHD</h2></div>
+        <p class="note">Pada orang dewasa, sulit fokus juga sering disebabkan stres, suasana hati, kurang tidur, atau perubahan hormon. Boleh dilewati, tapi sangat disarankan.</p>
+        <div id="listCtx"></div>
+      </section>
+
+      <section class="panel" aria-labelledby="nH">
+        <h2 id="nH">Contoh situasi (opsional)</h2>
+        <textarea id="catatan" placeholder="Contoh: Sering terlambat membayar tagihan walau uangnya ada. Rapat panjang terasa sangat berat."></textarea>
+      </section>
+
+      <div class="actions">
+        <button type="submit" class="btn">Lihat hasil</button>
+        <button type="button" class="btn ghost" id="resetBtn">Kosongkan jawaban</button>
+      </div>
+      <p class="err" id="formErr" hidden></p>
+      <div id="resetConfirm" class="panel" hidden>
+        <p>Hapus semua jawaban dan mulai dari awal?</p>
+        <div class="actions">
+          <button type="button" class="btn" id="resetYes">Ya, kosongkan</button>
+          <button type="button" class="btn ghost" id="resetNo">Batal</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <section class="panel" id="result" hidden aria-labelledby="rH">
+    <span class="eyebrow" id="rH">Hasil skrining dewasa</span>
+    <p class="verdict" id="verdict"></p>
+    <span class="badge" id="conf"></span>
+    <p id="verdictSub" class="lead"></p>
+    <div id="urgentBox"></div>
+
+    <h2>Dua cara hitung</h2>
+    <div class="methods">
+      <div class="method">
+        <span class="lbl">Skrining 6 pertanyaan inti (ASRS bagian A)</span>
+        <span class="src">4 atau lebih dari 6 jawaban di zona tanda = pola yang konsisten dengan ADHD dewasa.</span>
+        <div class="mrow"><span>Di zona tanda</span><b id="partA"></b><span class="st" id="partAst"></span></div>
+      </div>
+      <div class="method">
+        <span class="lbl">Jumlah gejala (DSM-5 dewasa)</span>
+        <span class="src">Batas dewasa: 5 dari 9 gejala per kelompok.</span>
+        <div class="mrow"><span>Inatensi</span><b id="cntA"></b><span class="st" id="cntAst"></span></div>
+        <div class="mrow"><span>Hiperaktif-impulsif</span><b id="cntB"></b><span class="st" id="cntBst"></span></div>
+      </div>
+    </div>
+    <div class="cde" id="cdeBox"></div>
+
+    <h2>Pola gejala</h2>
+    <p class="note">Rata-rata tiap kelompok, skala 0–4.</p>
+    <div class="themes" id="themes"></div>
+
+    <h2>Yang bisa dicoba</h2>
+    <div class="tips" id="tips"></div>
+    <div id="flagsBox"></div>
+
+    <h2>Langkah berikutnya</h2>
+    <div class="next"><ol id="nextList"></ol></div>
+
+    <h2>Simpan dan kirim</h2>
+    <div class="actions">
+      <button type="button" class="btn ghost" id="copyBtn">Salin ringkasan untuk WhatsApp</button>
+      <button type="button" class="btn ghost" id="editBtn">Ubah jawaban</button>
+    </div>
+    <p class="ok-msg" id="saveMsg" hidden></p>
+    <p class="ok-msg" id="copyMsg" hidden></p>
+    <pre class="share" id="shareTxt"></pre>
+
+    <details class="method-info">
+      <summary>Bagaimana hasil ini dihitung</summary>
+      <div>
+        <p><b>Pertanyaan.</b> 18 pertanyaan adalah 18 gejala ADHD di DSM-5 dengan contoh situasi orang dewasa (pekerjaan, rapat, tagihan, janji). Urutan dan skala 5 tingkat mengikuti pola Adult ADHD Self-Report Scale (ASRS v1.1) dari WHO.</p>
+        <p><b>Zona tanda.</b> Seperti ASRS, setiap pertanyaan punya batasnya sendiri. Untuk pertanyaan 1, 2, 3, 7, 8, 9, 12, 16, dan 18, jawaban “Kadang-kadang” ke atas sudah dihitung. Untuk pertanyaan lainnya, baru dihitung dari “Sering” ke atas.</p>
+        <p><b>Skrining inti.</b> 4 atau lebih dari 6 pertanyaan pertama di zona tanda = konsisten dengan ADHD dewasa dan layak dievaluasi lebih lanjut.</p>
+        <p><b>Jumlah gejala.</b> Gejala di zona tanda dihitung per kelompok. Untuk usia 17 tahun ke atas, DSM-5 mensyaratkan minimal 5 dari 9.</p>
+        <p><b>Kriteria C, D, E.</b> C: sudah ada sebelum usia 12 tahun. D: terlihat di 2 bidang atau lebih. E: ada bidang dengan nilai 4 atau 5.</p>
+        <p><b>Tingkat keyakinan.</b> “Indikasi kuat” bila skrining inti dan jumlah gejala sama-sama melewati batas serta C, D, E terpenuhi. “Di ambang” bila hanya sebagian. Selebihnya “indikasi rendah”.</p>
+      </div>
+    </details>
+    <p class="disclaimer">Ini skrining, bukan diagnosis. Diagnosis ADHD dewasa ditegakkan psikolog klinis atau psikiater melalui wawancara, riwayat masa kecil, keterangan orang terdekat, dan pemeriksaan penyebab lain.</p>
+  </section>
+
+</div>
+
+<script>
+/* ===== SCORING (pure functions) ===== */
+var OPTS = ["Tidak pernah", "Jarang", "Kadang-kadang", "Sering", "Sangat sering"];
+/* [text, example, short label, domain A/B, threshold 2=Kadang-kadang or 3=Sering] */
+var ITEMS = [
+  ["Seberapa sering Anda sulit menuntaskan bagian akhir sebuah pekerjaan, setelah bagian yang menantang sudah selesai?", "Contoh: laporan hampir jadi tapi tidak dikirim, renovasi tinggal finishing tapi berhenti.", "Sulit menuntaskan", "A", 2],
+  ["Seberapa sering Anda kesulitan menyusun dan mengatur urutan langkah untuk tugas yang perlu perencanaan?", "Contoh: menyiapkan acara keluarga, mengurus dokumen, perjalanan.", "Sulit mengatur", "A", 2],
+  ["Seberapa sering Anda lupa janji temu atau kewajiban?", "Contoh: jadwal dokter, bayar tagihan, janji dengan teman, pesan titipan.", "Lupa janji", "A", 2],
+  ["Bila ada tugas yang butuh banyak berpikir, seberapa sering Anda menghindar atau menunda memulainya?", "", "Menunda memulai", "A", 3],
+  ["Seberapa sering tangan atau kaki Anda bergerak-gerak atau Anda menggeliat bila harus duduk lama?", "", "Kaki/tangan bergerak", "B", 3],
+  ["Seberapa sering Anda merasa terlalu aktif dan terdorong untuk terus melakukan sesuatu, seperti digerakkan mesin?", "", "Seperti mesin", "B", 3],
+  ["Seberapa sering Anda membuat kesalahan karena kurang teliti saat mengerjakan sesuatu yang membosankan atau sulit?", "", "Kurang teliti", "A", 2],
+  ["Seberapa sering Anda sulit mempertahankan perhatian pada pekerjaan yang membosankan atau berulang?", "", "Fokus bertahan", "A", 2],
+  ["Seberapa sering Anda sulit menyimak omongan orang, bahkan ketika ia berbicara langsung kepada Anda?", "", "Sulit menyimak", "A", 2],
+  ["Seberapa sering Anda salah menaruh atau sulit menemukan barang di rumah atau di kantor?", "Contoh: kunci, dompet, HP, kacamata, dokumen.", "Salah taruh barang", "A", 3],
+  ["Seberapa sering Anda teralih oleh kegiatan atau suara di sekitar?", "", "Mudah teralih", "A", 3],
+  ["Seberapa sering Anda meninggalkan tempat duduk di rapat atau situasi lain yang mengharuskan tetap duduk?", "", "Tinggalkan kursi", "B", 2],
+  ["Seberapa sering Anda merasa gelisah atau tidak tenang?", "", "Gelisah", "B", 3],
+  ["Seberapa sering Anda sulit menenangkan diri dan bersantai saat punya waktu luang?", "", "Sulit bersantai", "B", 3],
+  ["Seberapa sering Anda merasa bicara terlalu banyak dalam situasi sosial?", "", "Banyak bicara", "B", 3],
+  ["Saat mengobrol, seberapa sering Anda menyelesaikan kalimat orang lain sebelum mereka selesai?", "", "Menyelesaikan kalimat", "B", 2],
+  ["Seberapa sering Anda sulit menunggu giliran ketika memang harus menunggu?", "Contoh: antre, lampu merah, menunggu balasan.", "Sulit menunggu", "B", 3],
+  ["Seberapa sering Anda menyela orang lain yang sedang sibuk?", "", "Menyela", "B", 2]
+];
+var ONSET = [["yes", "Ya, jelas ada"], ["maybe", "Mungkin ada"], ["no", "Tidak, baru muncul saat dewasa"], ["unknown", "Tidak ingat"]];
+var SETTINGS = [["kerja", "Pekerjaan"], ["rumah", "Urusan rumah"], ["pasangan", "Hubungan pasangan"], ["anak", "Mengasuh anak"], ["uang", "Keuangan dan administrasi"], ["sosial", "Pertemanan dan sosial"]];
+var IMP = [["Kinerja dan tanggung jawab pekerjaan"], ["Keuangan dan administrasi (tagihan, dokumen, pajak)"], ["Hubungan dengan pasangan"], ["Mengasuh anak dan urusan rumah tangga"], ["Kesehatan dan kebiasaan (tidur, makan, olahraga)"], ["Pertemanan dan kehidupan sosial"]];
+var CTX = [
+  ["hopeless", "Merasa tidak ada harapan, tidak berharga, atau punya pikiran untuk mengakhiri hidup."],
+  ["mood", "Merasa sedih, hampa, atau kehilangan minat hampir setiap hari selama 2 minggu atau lebih."],
+  ["anxiety", "Sering cemas atau khawatir berlebihan sampai sulit dikendalikan."],
+  ["sleep", "Tidur kurang dari 6–7 jam, sering terbangun, atau mendengkur keras dan tetap lelah di pagi hari."],
+  ["stress", "Sedang mengalami stres berat atau kelelahan (burnout) dalam setahun terakhir."],
+  ["hormone", "Ada perubahan hormon atau kondisi medis: gangguan tiroid, kehamilan atau pasca melahirkan, perimenopause, atau obat yang membuat mengantuk."],
+  ["substance", "Rutin minum alkohol atau memakai zat lain untuk menenangkan diri."],
+  ["family", "Anak atau saudara kandung didiagnosis atau diduga ADHD."]
+];
+var THEMES = [
+  { key: "mulai", group: "a", name: "Memulai dan menuntaskan", items: [0, 3, 6], tips: ["Aturan “mulai 10 menit saja”, lalu putuskan lanjut atau tidak.", "Tulis langkah pertama yang sangat kecil dan konkret, bukan nama proyeknya.", "Buat tenggat internal 1–2 hari sebelum tenggat sebenarnya."] },
+  { key: "atur", group: "a", name: "Organisasi dan ingatan", items: [1, 2, 9], tips: ["Satu kalender utama dengan alarm untuk semua janji dan tagihan.", "Autodebet untuk tagihan rutin.", "Satu tempat tetap untuk kunci, dompet, dan kacamata di dekat pintu."] },
+  { key: "fokus", group: "a", name: "Fokus dan perhatian", items: [7, 8, 10], tips: ["Kerja dalam blok 25 menit dengan notifikasi mati.", "Tulis singkat poin penting saat orang bicara, atau ulangi dengan kalimat sendiri.", "Headphone atau ruang tenang untuk pekerjaan yang butuh konsentrasi."] },
+  { key: "gelisah", group: "b", name: "Gelisah dan sulit santai", items: [4, 5, 11, 12, 13], tips: ["Olahraga rutin, terutama di pagi hari.", "Izinkan gerakan kecil: berjalan saat menelepon, meja berdiri.", "Jadwalkan waktu santai seperti menjadwalkan rapat."] },
+  { key: "impulsif", group: "b", name: "Impulsif saat berbicara", items: [14, 15, 16, 17], tips: ["Latih jeda satu napas sebelum menanggapi.", "Minta pasangan memberi sinyal kecil yang disepakati saat Anda menyela.", "Catat ide yang muncul agar tidak perlu langsung diucapkan."] }
+];
+function hit(v, i) { return v != null && v >= ITEMS[i][4]; }
+function computeResult(r) {
+  var S = r.S;
+  var partA = 0; for (var i = 0; i < 6; i++) if (hit(S[i], i)) partA++;
+  var a = 0, b = 0;
+  S.forEach(function (v, i) { if (hit(v, i)) { if (ITEMS[i][3] === "A") a++; else b++; } });
+  var th = 5;
+  var scr = partA >= 4, cntA = a >= th, cntB = b >= th;
+  var C = r.onset === "yes", Cmaybe = r.onset === "maybe" || r.onset === "unknown";
+  var D = (r.settings || []).length >= 2;
+  var E = (r.imp || []).some(function (v) { return v >= 4; });
+  var type = cntA && cntB ? "kombinasi" : cntA ? "predominan inatensi" : cntB ? "predominan hiperaktif-impulsif" : null;
+  var near = (!cntA && a === th - 1) || (!cntB && b === th - 1);
+  var level, verdict, sub;
+  if (scr && type && (C || Cmaybe) && D && E && !(r.onset === "no")) {
+    if (C) { level = "high"; verdict = "Mengarah ke ADHD dewasa, " + type; sub = "Skrining inti dan jumlah gejala sama-sama melewati batas, gejala sudah ada sejak kecil, dan berdampak di beberapa bidang. Layak dievaluasi psikolog klinis atau psikiater."; }
+    else { level = "mid"; verdict = "Di ambang: pola " + type; sub = "Polanya kuat, tetapi riwayat sebelum usia 12 tahun belum jelas. Tanyakan ke orang tua atau cari rapor lama, karena ADHD harus sudah ada sejak kecil."; }
+  } else if (scr || type || near) {
+    level = "mid"; verdict = type ? "Di ambang: pola " + type : "Di ambang batas";
+    var why = [];
+    if (!scr) why.push("skrining inti belum melewati batas");
+    if (!type) why.push(near ? "kurang 1 gejala dari batas" : "jumlah gejala di bawah batas");
+    if (r.onset === "no") why.push("gejala baru muncul saat dewasa");
+    else if (!C) why.push("riwayat masa kecil belum pasti");
+    if (!D) why.push("baru terlihat di kurang dari 2 bidang");
+    if (!E) why.push("dampaknya belum berat");
+    sub = "Hasilnya belum tegas karena " + why.join(", ") + ". Bandingkan dengan penilaian pasangan atau keluarga.";
+  } else {
+    level = "low"; verdict = "Indikasi ADHD rendah";
+    sub = "Skrining inti dan jumlah gejala berada di bawah batas. Bila kesulitan fokus tetap terasa, penyebab lain seperti stres, tidur, suasana hati, atau hormon lebih mungkin.";
+  }
+  var themes = THEMES.map(function (t) { var s = 0; t.items.forEach(function (k) { s += S[k]; }); return { name: t.name, group: t.group, score: Math.round(s / t.items.length * 100) / 100, tips: t.tips }; });
+  var top = themes.filter(function (t) { return t.score >= 2; }).sort(function (x, y) { return y.score - x.score; }).slice(0, 3);
+  if (!top.length) top = themes.slice().sort(function (x, y) { return y.score - x.score; }).slice(0, 1);
+  var ctx = r.ctx || {}, flags = [];
+  if (ctx.mood === "y") flags.push("Ada tanda depresi. Depresi membuat sulit fokus dan menunda, mirip ADHD. Perlu diperiksa juga.");
+  if (ctx.anxiety === "y") flags.push("Ada tanda kecemasan, yang juga mengganggu konsentrasi.");
+  if (ctx.sleep === "y") flags.push("Masalah tidur (termasuk kemungkinan sleep apnea bila mendengkur keras) sangat menurunkan fokus dan daya ingat.");
+  if (ctx.stress === "y") flags.push("Stres berat atau burnout bisa menimbulkan gejala mirip ADHD yang membaik bila bebannya berkurang.");
+  if (ctx.hormone === "y") flags.push("Perubahan hormon dan kondisi medis (tiroid, perimenopause, pasca melahirkan) bisa menurunkan konsentrasi. Diskusikan dengan dokter.");
+  if (ctx.substance === "y") flags.push("Alkohol atau zat lain dapat memperburuk fokus, dan kadang dipakai untuk meredam gejala ADHD yang belum dikenali.");
+  if (ctx.family === "y") flags.push("Ada anak atau saudara dengan dugaan ADHD. ADHD sangat dipengaruhi faktor keturunan, sehingga kemungkinannya lebih tinggi.");
+  if (r.onset === "no") flags.push("Gejala baru muncul saat dewasa. Ini kurang khas untuk ADHD, jadi penyebab lain perlu diperiksa lebih dulu.");
+  var urgent = ctx.hopeless === "y";
+  var next = [];
+  if (urgent) next.push("Utamakan bicara dengan psikolog, psikiater, atau dokter segera tentang rasa putus asa atau pikiran mengakhiri hidup.");
+  if (level !== "low") next.push("Bawa hasil ini ke psikolog klinis atau psikiater yang menangani ADHD dewasa.");
+  if ((r.pengisi || "") === "Diri sendiri") next.push("Minta pasangan atau orang terdekat mengisi kuesioner yang sama tentang Anda, lalu bandingkan kedua ringkasannya.");
+  if (!C) next.push("Tanyakan ke orang tua atau saudara tentang perilaku Anda di masa SD, atau cari rapor lama.");
+  if (flags.length) next.push("Sampaikan juga hal-hal di bagian “Perlu diperhatikan” agar penyebab lain bisa dibedakan.");
+  next.push("Coba 2–3 strategi di atas selama sebulan, lalu isi lagi untuk melihat perubahan.");
+  return { partA: partA, a: a, b: b, th: th, scr: scr, cntA: cntA, cntB: cntB, C: C, Cmaybe: Cmaybe, D: D, E: E, level: level, verdict: verdict, sub: sub, themes: themes, top: top, flags: flags, urgent: urgent, next: next };
+}
+/* ===== END SCORING ===== */
+
+(function () {
+  var KEY = "adhd-dewasa-draft-v1";
+  function blank() { return { S: Array(18).fill(null), onset: null, settings: [], imp: Array(6).fill(null), ctx: {} }; }
+  var st = blank(), lastResp = null, lastRes = null, saved = false;
+  var $ = function (id) { return document.getElementById(id); };
+  function el(tag, attrs, html) { var e = document.createElement(tag); for (var k in attrs || {}) e.setAttribute(k, attrs[k]); if (html != null) e.innerHTML = html; return e; }
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function fmt(n) { return n.toFixed(2).replace(".", ","); }
+
+  ITEMS.forEach(function (it, i) {
+    var row = el("div", { class: "item", id: "item-S" + i, role: "group", "aria-label": "Pertanyaan " + (i + 1) });
+    row.appendChild(el("div", { class: "q" }, '<span class="k">' + (i + 1) + '.</span><span>' + esc(it[0]) + (it[1] ? '<span class="ex">' + esc(it[1]) + '</span>' : '') + '</span>'));
+    var sc = el("div", { class: "scale" });
+    OPTS.forEach(function (o, v) {
+      var b = el("button", { type: "button", "aria-pressed": "false", id: "b-S" + i + "-" + v }, o);
+      b.addEventListener("click", function () { st.S[i] = v; changed(); });
+      sc.appendChild(b);
+    });
+    row.appendChild(sc); $("listS").appendChild(row);
+  });
+  ONSET.forEach(function (o) {
+    var b = el("button", { type: "button", "aria-pressed": "false", id: "on-" + o[0] }, o[1]);
+    b.addEventListener("click", function () { st.onset = o[0]; changed(); });
+    $("onsetPills").appendChild(b);
+  });
+  SETTINGS.forEach(function (s) {
+    var b = el("button", { type: "button", class: "chk", "aria-pressed": "false", id: "se-" + s[0] }, s[1]);
+    b.addEventListener("click", function () { var i = st.settings.indexOf(s[0]); if (i >= 0) st.settings.splice(i, 1); else st.settings.push(s[0]); changed(); });
+    $("settingChks").appendChild(b);
+  });
+  IMP.forEach(function (it, i) {
+    var row = el("div", { class: "item", id: "item-I" + i });
+    row.appendChild(el("div", { class: "q" }, '<span class="k">' + (i + 1) + '.</span><span>' + esc(it[0]) + '</span>'));
+    var sc = el("div", { class: "scale" });
+    [1, 2, 3, 4, 5].forEach(function (v) {
+      var b = el("button", { type: "button", "aria-pressed": "false", id: "b-I" + i + "-" + v, "aria-label": it[0] + ": " + v }, String(v));
+      b.addEventListener("click", function () { st.imp[i] = v; changed(); });
+      sc.appendChild(b);
+    });
+    row.appendChild(sc);
+    row.appendChild(el("div", { class: "scale-legend" }, "<span>Sangat baik</span><span>Rata-rata</span><span>Sangat bermasalah</span>"));
+    $("listImp").appendChild(row);
+  });
+  CTX.forEach(function (c, i) {
+    var row = el("div", { class: "item", id: "item-X" + i });
+    row.appendChild(el("div", { class: "q" }, '<span class="k">' + (i + 1) + '.</span><span>' + esc(c[1]) + '</span>'));
+    var p = el("div", { class: "pill" });
+    [["y", "Ya"], ["n", "Tidak"], ["u", "Tidak tahu"]].forEach(function (o) {
+      var b = el("button", { type: "button", "aria-pressed": "false", id: "x-" + c[0] + "-" + o[0] }, o[1]);
+      b.addEventListener("click", function () { st.ctx[c[0]] = o[0]; changed(); });
+      p.appendChild(b);
+    });
+    row.appendChild(p); $("listCtx").appendChild(row);
+  });
+
+  function requiredMissing() {
+    var m = [];
+    st.S.forEach(function (v, i) { if (v === null) m.push("item-S" + i); });
+    if (!st.onset) m.push("item-onset");
+    st.imp.forEach(function (v, i) { if (v === null) m.push("item-I" + i); });
+    return m;
+  }
+  function sync() {
+    st.S.forEach(function (v, i) { for (var k = 0; k < 5; k++) $("b-S" + i + "-" + k).setAttribute("aria-pressed", v === k ? "true" : "false"); });
+    ONSET.forEach(function (o) { $("on-" + o[0]).setAttribute("aria-pressed", st.onset === o[0] ? "true" : "false"); });
+    SETTINGS.forEach(function (s) { $("se-" + s[0]).setAttribute("aria-pressed", st.settings.indexOf(s[0]) >= 0 ? "true" : "false"); });
+    st.imp.forEach(function (v, i) { for (var k = 1; k <= 5; k++) $("b-I" + i + "-" + k).setAttribute("aria-pressed", v === k ? "true" : "false"); });
+    CTX.forEach(function (c) { ["y", "n", "u"].forEach(function (o) { $("x-" + c[0] + "-" + o).setAttribute("aria-pressed", st.ctx[c[0]] === o ? "true" : "false"); }); });
+    var miss = requiredMissing();
+    document.querySelectorAll(".missing").forEach(function (n) { if (miss.indexOf(n.id) < 0) n.classList.remove("missing"); });
+    var done = 25 - miss.length;
+    $("progTxt").textContent = done + " / 25";
+    $("progBar").style.width = (done / 25 * 100) + "%";
+  }
+  var fields = ["nama", "usia", "pengisi", "tanggal", "catatan"];
+  function changed() { saved = false; sync(); save(); }
+  function save() { try { var d = { s: st, f: {} }; fields.forEach(function (id) { d.f[id] = $(id).value; }); localStorage.setItem(KEY, JSON.stringify(d)); } catch (e) {} }
+  function load() { try { var d = JSON.parse(localStorage.getItem(KEY) || "null"); if (!d) return; if (d.s && d.s.S) st = d.s; fields.forEach(function (id) { if (d.f && d.f[id]) $(id).value = d.f[id]; }); } catch (e) {} }
+  function collect() { return { v: 1, nama: $("nama").value.trim(), usia: $("usia").value, pengisi: $("pengisi").value, tanggal: $("tanggal").value, S: st.S.slice(), onset: st.onset, settings: st.settings.slice(), imp: st.imp.slice(), ctx: Object.assign({}, st.ctx), catatan: $("catatan").value.trim() }; }
+
+  function render(resp) {
+    var r = computeResult(resp); lastResp = resp; lastRes = r;
+    $("verdict").textContent = r.verdict;
+    $("conf").className = "badge " + r.level;
+    $("conf").textContent = r.level === "high" ? "Indikasi kuat" : r.level === "mid" ? "Di ambang" : "Indikasi rendah";
+    $("verdictSub").textContent = r.sub;
+    $("urgentBox").innerHTML = r.urgent ? '<div class="urgent"><b>Perlu perhatian segera</b><p>Ada rasa putus asa atau pikiran mengakhiri hidup. Ini lebih penting dari skrining ADHD. Bicarakan dengan orang terdekat dan hubungi psikolog, psikiater, atau dokter secepatnya. Bila ada risiko langsung, hubungi 119 atau 112, atau datang ke IGD terdekat.</p></div>' : "";
+    function setSt(id, met, label) { var e = $(id); e.textContent = label; e.className = "st " + (met ? "met" : "no"); }
+    $("partA").textContent = r.partA + " / 6"; setSt("partAst", r.scr, r.scr ? "Melewati batas 4" : "Di bawah batas 4");
+    $("cntA").textContent = r.a + " / 9"; setSt("cntAst", r.cntA, (r.cntA ? "Melewati" : "Di bawah") + " batas 5");
+    $("cntB").textContent = r.b + " / 9"; setSt("cntBst", r.cntB, (r.cntB ? "Melewati" : "Di bawah") + " batas 5");
+    var onsetLbl = (ONSET.filter(function (o) { return o[0] === resp.onset; })[0] || [0, "-"])[1];
+    var setLbl = (resp.settings || []).map(function (k) { return (SETTINGS.filter(function (s) { return s[0] === k; })[0] || [0, k])[1]; }).join(", ") || "belum dipilih";
+    var maxImp = Math.max.apply(null, (resp.imp || [0]).map(function (v) { return v || 0; }));
+    function line(ok, txt) { return '<div><span class="' + (ok ? "y" : "n") + '">' + (ok ? "✓" : "✗") + '</span><span>' + txt + '</span></div>'; }
+    $("cdeBox").innerHTML = line(r.C, "<b>C · Sejak sebelum 12 tahun:</b> " + esc(onsetLbl)) + line(r.D, "<b>D · Dua bidang atau lebih:</b> " + esc(setLbl)) + line(r.E, "<b>E · Mengganggu fungsi:</b> nilai tertinggi " + maxImp + " dari 5");
+    $("themes").innerHTML = r.themes.map(function (t) { return '<div class="theme ' + t.group + '"><span>' + esc(t.name) + '</span><div class="track"><i style="width:' + (t.score / 4 * 100) + '%"></i></div><b>' + fmt(t.score) + '</b></div>'; }).join("");
+    $("tips").innerHTML = r.top.map(function (t) { return '<div class="tip"><h3>' + esc(t.name) + '</h3><ul>' + t.tips.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + '</ul></div>'; }).join("");
+    $("flagsBox").innerHTML = r.flags.length ? '<div class="flags"><h3>Perlu diperhatikan</h3><ul>' + r.flags.map(function (f) { return "<li>" + esc(f) + "</li>"; }).join("") + '</ul></div>' : "";
+    $("nextList").innerHTML = r.next.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("");
+    var L = [];
+    L.push("SKRINING ADHD DEWASA");
+    L.push("Dinilai: " + (resp.nama || "-") + (resp.usia ? " (" + resp.usia + " th)" : "") + " | Diisi: " + resp.pengisi + " | " + (resp.tanggal || "-"));
+    L.push(""); L.push("HASIL: " + r.verdict + " [" + $("conf").textContent + "]");
+    L.push("Skrining inti (ASRS A): " + r.partA + "/6 (batas 4)");
+    L.push("Gejala DSM-5: Inatensi " + r.a + "/9, Hiperaktif " + r.b + "/9 (batas 5)");
+    L.push("C=" + (r.C ? "Ya" : "Belum pasti/Tidak") + " D=" + (r.D ? "Ya" : "Tidak") + " E=" + (r.E ? "Ya" : "Tidak"));
+    L.push("Pola terkuat: " + r.top.map(function (t) { return t.name + " (" + fmt(t.score) + ")"; }).join(", "));
+    if (r.urgent) L.push("PENTING: ada rasa putus asa / pikiran mengakhiri hidup.");
+    if (r.flags.length) { L.push("Perlu diperhatikan:"); r.flags.forEach(function (f) { L.push("- " + f); }); }
+    L.push(""); L.push("Jawaban 1-18 (0-4): " + resp.S.join(""));
+    L.push("Dampak (1-5): " + resp.imp.join(" "));
+    if (resp.catatan) { L.push(""); L.push("Catatan: " + resp.catatan); }
+    $("shareTxt").textContent = L.join("\n");
+    $("saveMsg").hidden = true; $("copyMsg").hidden = true;
+    var res = $("result"); res.hidden = false;
+    res.scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block: "start" });
+  }
+
+  var db = null, histRows = [], histOpen = false;
+  function histUnavailable() { if (db) return; $("histToggle").hidden = true; $("histNote").textContent = "Riwayat bersama tidak tersedia di tampilan ini. Gunakan tombol Salin ringkasan untuk mengirim hasil."; }
+  function initDb() {
+    if (!window.claude || !window.claude.use) { histUnavailable(); return; }
+    var timer = setTimeout(histUnavailable, 10000);
+    window.claude.use("db").then(function (d) {
+      if (!d) { clearTimeout(timer); histUnavailable(); return; }
+      db = d; $("saveBtn").hidden = false;
+      db.collection("responses").orderBy("createdAt", "desc").limit(100).onSnapshot(function (snap) {
+        clearTimeout(timer);
+        histRows = snap.docs.map(function (s) { return { id: s.id, d: s.data() }; });
+        var t = $("histToggle"); t.disabled = false;
+        t.textContent = histOpen ? "Sembunyikan riwayat" : "Tampilkan riwayat (" + histRows.length + ")";
+        if (histOpen) renderHist();
+      }, function () { clearTimeout(timer); histUnavailable(); });
+    }, function () { clearTimeout(timer); histUnavailable(); });
+  }
+  function renderHist() {
+    var list = $("histList");
+    if (!histRows.length) { list.innerHTML = '<p class="note">Belum ada hasil tersimpan. Setelah mengisi, tekan “Simpan ke riwayat”.</p>'; $("cmpTable").innerHTML = ""; return; }
+    list.innerHTML = "";
+    histRows.forEach(function (h) {
+      var d = h.d, r = computeResult(d);
+      var row = el("div", { class: "hrow" });
+      row.appendChild(el("div", {}, "<div><b>" + esc(d.nama || "-") + "</b> · diisi " + esc((d.pengisi || "-").toLowerCase()) + " · " + esc(d.tanggal || "") + '</div><div class="meta">' + esc(r.verdict) + '</div><div class="nums">ASRS-A ' + r.partA + "/6 · Inatensi " + r.a + " · Hiperaktif " + r.b + "</div>"));
+      var act = el("div", { class: "actions" });
+      var open = el("button", { type: "button", class: "btn ghost small" }, "Lihat");
+      open.addEventListener("click", function () { saved = true; render(d); });
+      var del = el("button", { type: "button", class: "btn ghost small" }, "Hapus");
+      del.addEventListener("click", function () { if (del.dataset.c) { db.collection("responses").doc(h.id).delete().catch(function () { del.textContent = "Gagal"; }); } else { del.dataset.c = "1"; del.textContent = "Yakin hapus?"; } });
+      act.appendChild(open); act.appendChild(del); row.appendChild(act); list.appendChild(row);
+    });
+    var cols = histRows.slice(0, 6).slice().reverse();
+    var head = "<tr><th>Pertanyaan</th>" + cols.map(function (h) { return "<th>" + esc((h.d.nama || "-").split(" ")[0]) + "<br>" + esc(h.d.pengisi === "Diri sendiri" ? "diri" : (h.d.pengisi || "").toLowerCase()) + "</th>"; }).join("") + "</tr>";
+    var body = "";
+    ITEMS.forEach(function (it, i) {
+      var vals = cols.map(function (h) { return h.d.S[i]; });
+      var diff = cols.length > 1 && (Math.max.apply(null, vals) - Math.min.apply(null, vals) >= 2);
+      body += '<tr class="' + (diff ? "diff" : "") + '"><td>' + (i + 1) + " · " + esc(it[2]) + "</td>" + vals.map(function (v) { return '<td class="v v' + v + (hit(v, i) ? " hit" : "") + '">' + v + "</td>"; }).join("") + "</tr>";
+    });
+    var rs = cols.map(function (h) { return computeResult(h.d); });
+    body += "<tr><td><b>ASRS-A / Inat / Hiper</b></td>" + rs.map(function (r) { return '<td class="v">' + r.partA + " / " + r.a + " / " + r.b + "</td>"; }).join("") + "</tr>";
+    $("cmpTable").innerHTML = "<thead>" + head + "</thead><tbody>" + body + "</tbody>";
+  }
+
+  load();
+  if (!$("tanggal").value) $("tanggal").value = new Date().toISOString().slice(0, 10);
+  sync();
+  fields.forEach(function (id) { $(id).addEventListener("input", function () { saved = false; save(); }); });
+
+  $("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var miss = requiredMissing(), err = $("formErr");
+    if (miss.length) {
+      miss.forEach(function (id) { $(id).classList.add("missing"); });
+      err.textContent = miss.length + " pertanyaan wajib belum dijawab. Yang belum dijawab ditandai merah.";
+      err.hidden = false; $(miss[0]).scrollIntoView({ behavior: "smooth", block: "center" }); return;
+    }
+    err.hidden = true; render(collect());
+  });
+  $("resetBtn").addEventListener("click", function () { $("resetConfirm").hidden = false; });
+  $("resetNo").addEventListener("click", function () { $("resetConfirm").hidden = true; });
+  $("resetYes").addEventListener("click", function () {
+    st = blank(); $("catatan").value = ""; saved = false;
+    $("resetConfirm").hidden = true; $("result").hidden = true;
+    document.querySelectorAll(".missing").forEach(function (n) { n.classList.remove("missing"); });
+    sync(); save(); window.scrollTo({ top: 0 });
+  });
+  $("editBtn").addEventListener("click", function () { $("secS").scrollIntoView({ behavior: "smooth", block: "start" }); });
+  $("copyBtn").addEventListener("click", function () {
+    var txt = $("shareTxt").textContent, msg = $("copyMsg");
+    function fallback() { var rg = document.createRange(); rg.selectNodeContents($("shareTxt")); var s = getSelection(); s.removeAllRanges(); s.addRange(rg); msg.textContent = "Teks sudah dipilih. Tekan Salin (Copy) di perangkat Anda."; msg.hidden = false; }
+    try { navigator.clipboard.writeText(txt).then(function () { msg.textContent = "Tersalin. Tempel di WhatsApp."; msg.hidden = false; }, fallback); } catch (e) { fallback(); }
+  });
+})();
+</script>
+</body></html>
