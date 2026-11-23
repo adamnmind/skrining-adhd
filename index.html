@@ -82,6 +82,10 @@ input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-
 .pill button { padding: 8px 14px; border-radius: 999px; min-height: 40px; font-size: 14px; }
 .chks { display: flex; flex-wrap: wrap; gap: 8px; margin-left: 38px; }
 .chk { padding: 8px 14px; border-radius: 999px; font-size: 14px; }
+.explain { display: grid; gap: 8px; font-size: 15px; background: var(--accent-soft); border-radius: 10px; padding: 14px 16px; }
+.scale.imp button { display: grid; gap: 2px; justify-items: center; padding: 8px 4px; }
+.scale.imp .n { font-family: var(--font-mono); font-size: 15px; }
+.scale.imp .w { font-size: 11px; font-weight: 500; line-height: 1.2; }
 .scale-legend { display: flex; justify-content: space-between; font-size: 12px; color: var(--muted); margin-left: 38px; }
 .actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .btn { font: inherit; font-weight: 700; padding: 12px 20px; border-radius: 12px; border: 1px solid var(--fg); background: var(--fg); color: var(--surface); cursor: pointer; min-height: 46px; }
@@ -197,8 +201,12 @@ tr.diff td:first-child { box-shadow: inset 3px 0 0 var(--warn); }
       </section>
 
       <section class="panel" id="secE" aria-labelledby="eH">
-        <div class="section-head"><span class="tag">BAGIAN 3 · DAMPAK</span><h2 id="eH">Seberapa besar pengaruhnya</h2></div>
-        <p class="note">1 = berjalan sangat baik, 3 = rata-rata, 5 = sangat bermasalah.</p>
+        <div class="section-head"><span class="tag">BAGIAN 3 · DAMPAK</span><h2 id="eH">Apakah kesulitan tadi mengganggu hidup sehari-hari?</h2></div>
+        <div class="explain">
+          <p>Di bagian sebelumnya Anda menilai <b>seberapa sering</b> kesulitan itu muncul. Di sini, nilai <b>seberapa besar akibatnya</b> di tiap bidang kehidupan selama 6 bulan terakhir.</p>
+          <p>Banyak orang sesekali lupa atau menunda, dan itu wajar. Yang dinilai adalah apakah hal itu sampai <b>menimbulkan masalah nyata</b>: ditegur, kena denda, bertengkar, pekerjaan menumpuk, atau merasa kewalahan.</p>
+          <p>Bila suatu bidang tidak berlaku (misalnya belum punya anak), pilih <b>1</b>.</p>
+        </div>
         <div id="listImp"></div>
       </section>
 
@@ -313,7 +321,15 @@ var ITEMS = [
 ];
 var ONSET = [["yes", "Ya, jelas ada"], ["maybe", "Mungkin ada"], ["no", "Tidak, baru muncul saat dewasa"], ["unknown", "Tidak ingat"]];
 var SETTINGS = [["kerja", "Pekerjaan"], ["rumah", "Urusan rumah"], ["pasangan", "Hubungan pasangan"], ["anak", "Mengasuh anak"], ["uang", "Keuangan dan administrasi"], ["sosial", "Pertemanan dan sosial"]];
-var IMP = [["Kinerja dan tanggung jawab pekerjaan"], ["Keuangan dan administrasi (tagihan, dokumen, pajak)"], ["Hubungan dengan pasangan"], ["Mengasuh anak dan urusan rumah tangga"], ["Kesehatan dan kebiasaan (tidur, makan, olahraga)"], ["Pertemanan dan kehidupan sosial"]];
+var IMP = [
+  ["Pekerjaan", "Contoh masalah: tugas sering terlambat atau harus diulang, ditegur atasan, rapat atau tenggat terlewat, merasa kerja jauh di bawah kemampuan."],
+  ["Keuangan dan administrasi", "Contoh masalah: telat bayar tagihan padahal uangnya ada, kena denda, dokumen penting hilang, urusan pajak atau BPJS tertunda."],
+  ["Hubungan dengan pasangan", "Contoh masalah: sering bertengkar karena lupa janji atau titipan, pasangan merasa tidak didengarkan, pembagian tugas rumah jadi sumber konflik."],
+  ["Mengasuh anak dan urusan rumah", "Contoh masalah: jadwal atau keperluan sekolah anak terlewat, rumah selalu berantakan, belanja dan masak sering tidak terencana."],
+  ["Kesehatan dan kebiasaan", "Contoh masalah: sering tidur larut, lupa minum obat atau kontrol ke dokter, makan tidak teratur, olahraga selalu berhenti di tengah jalan."],
+  ["Pertemanan dan kehidupan sosial", "Contoh masalah: sering terlambat atau membatalkan janji, lupa membalas pesan, tanpa sengaja memotong pembicaraan orang."]
+];
+var IMP_LBL = ["Tidak ada masalah", "Sedikit", "Kadang terasa", "Cukup mengganggu", "Sangat mengganggu"];
 var CTX = [
   ["hopeless", "Merasa tidak ada harapan, tidak berharga, atau punya pikiran untuk mengakhiri hidup."],
   ["mood", "Merasa sedih, hampa, atau kehilangan minat hampir setiap hari selama 2 minggu atau lebih."],
@@ -418,15 +434,14 @@ function computeResult(r) {
   });
   IMP.forEach(function (it, i) {
     var row = el("div", { class: "item", id: "item-I" + i });
-    row.appendChild(el("div", { class: "q" }, '<span class="k">' + (i + 1) + '.</span><span>' + esc(it[0]) + '</span>'));
-    var sc = el("div", { class: "scale" });
+    row.appendChild(el("div", { class: "q" }, '<span class="k">' + (i + 1) + '.</span><span><b>' + esc(it[0]) + '</b><span class="ex">' + esc(it[1]) + '</span></span>'));
+    var sc = el("div", { class: "scale imp" });
     [1, 2, 3, 4, 5].forEach(function (v) {
-      var b = el("button", { type: "button", "aria-pressed": "false", id: "b-I" + i + "-" + v, "aria-label": it[0] + ": " + v }, String(v));
+      var b = el("button", { type: "button", "aria-pressed": "false", id: "b-I" + i + "-" + v, "aria-label": it[0] + ": " + v + ", " + IMP_LBL[v - 1] }, '<span class="n">' + v + '</span><span class="w">' + IMP_LBL[v - 1] + '</span>');
       b.addEventListener("click", function () { st.imp[i] = v; changed(); });
       sc.appendChild(b);
     });
     row.appendChild(sc);
-    row.appendChild(el("div", { class: "scale-legend" }, "<span>Sangat baik</span><span>Rata-rata</span><span>Sangat bermasalah</span>"));
     $("listImp").appendChild(row);
   });
   CTX.forEach(function (c, i) {
